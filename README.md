@@ -1,0 +1,1 @@
+5_kutu_yontemi_bolt
