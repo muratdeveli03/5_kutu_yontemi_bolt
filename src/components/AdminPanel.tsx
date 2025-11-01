@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { LogOut, Upload, Users, BookOpen, Instagram } from 'lucide-react';
+import { LogOut, Upload, Users, BookOpen, Instagram, UserCog } from 'lucide-react';
 import StudentUpload from './admin/StudentUpload';
 import WordUpload from './admin/WordUpload';
 import WordManagement from './admin/WordManagement';
+import StudentManagement from './admin/StudentManagement';
 
-type AdminView = 'students' | 'words' | 'manage';
+type AdminView = 'students' | 'words' | 'manage' | 'studentManage';
 
 export default function AdminPanel() {
   const { logout } = useAuth();
@@ -35,10 +36,10 @@ export default function AdminPanel() {
           </div>
         </div>
 
-        <div className="flex gap-3 mb-6 flex-wrap">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
           <button
             onClick={() => setActiveView('students')}
-            className={`flex-1 min-w-[200px] py-4 px-6 rounded-2xl font-bold text-lg transition-all ${
+            className={`py-4 px-6 rounded-2xl font-bold text-lg transition-all ${
               activeView === 'students'
                 ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg'
                 : 'bg-white text-gray-600 hover:bg-gray-50 border-2 border-gray-200'
@@ -48,8 +49,19 @@ export default function AdminPanel() {
             Öğrenci Yükle
           </button>
           <button
+            onClick={() => setActiveView('studentManage')}
+            className={`py-4 px-6 rounded-2xl font-bold text-lg transition-all ${
+              activeView === 'studentManage'
+                ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg'
+                : 'bg-white text-gray-600 hover:bg-gray-50 border-2 border-gray-200'
+            }`}
+          >
+            <UserCog className="w-5 h-5 inline mr-2" />
+            Öğrenci Yönetimi
+          </button>
+          <button
             onClick={() => setActiveView('words')}
-            className={`flex-1 min-w-[200px] py-4 px-6 rounded-2xl font-bold text-lg transition-all ${
+            className={`py-4 px-6 rounded-2xl font-bold text-lg transition-all ${
               activeView === 'words'
                 ? 'bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg'
                 : 'bg-white text-gray-600 hover:bg-gray-50 border-2 border-gray-200'
@@ -60,7 +72,7 @@ export default function AdminPanel() {
           </button>
           <button
             onClick={() => setActiveView('manage')}
-            className={`flex-1 min-w-[200px] py-4 px-6 rounded-2xl font-bold text-lg transition-all ${
+            className={`py-4 px-6 rounded-2xl font-bold text-lg transition-all ${
               activeView === 'manage'
                 ? 'bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg'
                 : 'bg-white text-gray-600 hover:bg-gray-50 border-2 border-gray-200'
@@ -72,6 +84,7 @@ export default function AdminPanel() {
         </div>
 
         {activeView === 'students' && <StudentUpload />}
+        {activeView === 'studentManage' && <StudentManagement />}
         {activeView === 'words' && <WordUpload />}
         {activeView === 'manage' && <WordManagement />}
 
