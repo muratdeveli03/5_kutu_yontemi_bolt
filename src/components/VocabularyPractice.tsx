@@ -165,23 +165,23 @@ export default function VocabularyPractice({ onProgressUpdate }: VocabularyPract
 
   if (loading) {
     return (
-      <div className="bg-white rounded-3xl shadow-xl p-8 border-2 border-blue-100 text-center">
-        <div className="text-xl text-gray-600">Kelimeler yükleniyor...</div>
+      <div className="bg-white rounded-3xl shadow-xl p-4 md:p-8 border-2 border-blue-100 text-center">
+        <div className="text-lg md:text-xl text-gray-600">Kelimeler yükleniyor...</div>
       </div>
     );
   }
 
   if (completed) {
     return (
-      <div className="bg-white rounded-3xl shadow-xl p-8 border-2 border-green-200 text-center">
-        <Trophy className="w-20 h-20 text-yellow-500 mx-auto mb-4" />
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">
+      <div className="bg-white rounded-3xl shadow-xl p-4 md:p-8 border-2 border-green-200 text-center">
+        <Trophy className="w-16 md:w-20 h-16 md:h-20 text-yellow-500 mx-auto mb-4" />
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
           Tebrikler!
         </h2>
-        <p className="text-xl text-gray-600 mb-4">
+        <p className="text-lg md:text-xl text-gray-600 mb-4">
           Bugünlük çalışma tamamlandı!
         </p>
-        <p className="text-gray-500">
+        <p className="text-gray-500 text-base md:text-lg">
           Yarın yeni kelimelerle devam edebilirsin.
         </p>
       </div>
@@ -190,24 +190,24 @@ export default function VocabularyPractice({ onProgressUpdate }: VocabularyPract
 
   if (!currentWord) {
     return (
-      <div className="bg-white rounded-3xl shadow-xl p-8 border-2 border-blue-100 text-center">
-        <p className="text-xl text-gray-600">Henüz kelime yüklenmedi.</p>
+      <div className="bg-white rounded-3xl shadow-xl p-4 md:p-8 border-2 border-blue-100 text-center">
+        <p className="text-lg md:text-xl text-gray-600">Henüz kelime yüklenmedi.</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-3xl shadow-xl p-8 border-2 border-blue-100">
+    <div className="bg-white rounded-3xl shadow-xl p-4 md:p-8 border-2 border-blue-100">
       <div className="mb-6">
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-gray-600 font-semibold">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2 gap-2">
+          <span className="text-gray-600 font-semibold text-sm md:text-base">
             Kelime {currentIndex + 1} / {wordsToStudy.length}
           </span>
-          <div className="flex gap-1">
+          <div className="flex gap-1 flex-wrap">
             {wordsToStudy.map((_, idx) => (
               <div
                 key={idx}
-                className={`w-2 h-2 rounded-full ${
+                className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full ${
                   idx < currentIndex
                     ? 'bg-green-500'
                     : idx === currentIndex
@@ -226,16 +226,16 @@ export default function VocabularyPractice({ onProgressUpdate }: VocabularyPract
         </div>
       </div>
 
-      <div className="text-center mb-8">
-        <div className="inline-block bg-gradient-to-r from-blue-500 to-green-500 text-white px-8 py-6 rounded-3xl shadow-lg mb-4">
-          <p className="text-6xl font-bold">{currentWord.english}</p>
+      <div className="text-center mb-6 md:mb-8 overflow-x-auto">
+        <div className="inline-block bg-gradient-to-r from-blue-500 to-green-500 text-white px-4 md:px-8 py-4 md:py-6 rounded-3xl shadow-lg mb-4">
+          <p className="text-3xl md:text-6xl font-bold">{currentWord.english}</p>
         </div>
       </div>
 
       {feedback === null ? (
         <div className="space-y-4">
           <div>
-            <label className="block text-gray-700 font-semibold mb-2 text-lg">
+            <label className="block text-gray-700 font-semibold mb-2 text-base md:text-lg">
               Türkçe karşılığını yaz:
             </label>
             <input
@@ -244,7 +244,7 @@ export default function VocabularyPractice({ onProgressUpdate }: VocabularyPract
               onChange={(e) => setUserAnswer(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && checkAnswer()}
               placeholder="Cevabını buraya yaz..."
-              className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none text-lg"
+              className="w-full px-3 md:px-4 py-3 md:py-4 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none text-base md:text-lg"
               autoFocus
             />
           </div>
@@ -252,7 +252,7 @@ export default function VocabularyPractice({ onProgressUpdate }: VocabularyPract
           <button
             onClick={checkAnswer}
             disabled={!userAnswer.trim()}
-            className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-4 rounded-xl font-bold text-lg hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 md:py-4 rounded-xl font-bold text-base md:text-lg hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Kontrol Et
           </button>
@@ -260,20 +260,20 @@ export default function VocabularyPractice({ onProgressUpdate }: VocabularyPract
       ) : (
         <div className="space-y-4">
           {feedback === 'correct' ? (
-            <div className="bg-green-50 border-2 border-green-300 rounded-xl p-6 text-center">
-              <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-3" />
-              <p className="text-2xl font-bold text-green-700 mb-2">Doğru!</p>
+            <div className="bg-green-50 border-2 border-green-300 rounded-xl p-4 md:p-6 text-center">
+              <CheckCircle className="w-12 md:w-16 h-12 md:h-16 text-green-500 mx-auto mb-3" />
+              <p className="text-xl md:text-2xl font-bold text-green-700 mb-2">Doğru!</p>
               {movedToBox && (
-                <p className="text-green-600 text-lg">
+                <p className="text-green-600 text-base md:text-lg">
                   Kelime Kutu {movedToBox}'ya taşındı!
                 </p>
               )}
             </div>
           ) : (
-            <div className="bg-red-50 border-2 border-red-300 rounded-xl p-6 text-center">
-              <XCircle className="w-16 h-16 text-red-500 mx-auto mb-3" />
-              <p className="text-2xl font-bold text-red-700 mb-2">Yanlış!</p>
-              <p className="text-gray-700 text-lg">
+            <div className="bg-red-50 border-2 border-red-300 rounded-xl p-4 md:p-6 text-center">
+              <XCircle className="w-12 md:w-16 h-12 md:h-16 text-red-500 mx-auto mb-3" />
+              <p className="text-xl md:text-2xl font-bold text-red-700 mb-2">Yanlış!</p>
+              <p className="text-gray-700 text-base md:text-lg break-words">
                 Doğru cevap: <span className="font-bold">{currentWord.turkish}</span>
               </p>
             </div>
@@ -281,10 +281,10 @@ export default function VocabularyPractice({ onProgressUpdate }: VocabularyPract
 
           <button
             onClick={handleNext}
-            className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-4 rounded-xl font-bold text-lg hover:from-green-600 hover:to-green-700 transition-all shadow-lg flex items-center justify-center gap-2"
+            className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-3 md:py-4 rounded-xl font-bold text-base md:text-lg hover:from-green-600 hover:to-green-700 transition-all shadow-lg flex items-center justify-center gap-2"
           >
-            Sonraki Kelime
-            <ArrowRight className="w-5 h-5" />
+            <span>Sonraki Kelime</span>
+            <ArrowRight className="w-4 md:w-5 h-4 md:h-5" />
           </button>
         </div>
       )}

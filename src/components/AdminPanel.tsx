@@ -15,71 +15,75 @@ export default function AdminPanel() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50">
       <div className="max-w-6xl mx-auto p-4 pb-8">
-        <div className="bg-white rounded-3xl shadow-xl p-6 mb-6 border-2 border-green-100">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
-                <Upload className="w-7 h-7 text-white" />
+        <div className="bg-white rounded-3xl shadow-xl p-4 md:p-6 mb-6 border-2 border-green-100">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="flex items-center gap-3 flex-wrap">
+              <div className="w-12 md:w-14 h-12 md:h-14 bg-gradient-to-br from-green-500 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+                <Upload className="w-6 md:w-7 h-6 md:h-7 text-white" />
               </div>
-              <div>
-                <h2 className="text-2xl font-bold text-gray-800">Admin Paneli</h2>
-                <p className="text-gray-600">Sistem Yönetimi</p>
+              <div className="min-w-0">
+                <h2 className="text-xl md:text-2xl font-bold text-gray-800">Admin Paneli</h2>
+                <p className="text-gray-600 text-sm md:text-base">Sistem Yönetimi</p>
               </div>
             </div>
             <button
               onClick={logout}
-              className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition-colors font-semibold"
+              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition-colors font-semibold text-sm md:text-base whitespace-nowrap"
             >
               <LogOut className="w-4 h-4" />
-              Çıkış
+              <span className="hidden sm:inline">Çıkış</span>
             </button>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-6">
           <button
             onClick={() => setActiveView('students')}
-            className={`py-4 px-6 rounded-2xl font-bold text-lg transition-all ${
+            className={`py-3 md:py-4 px-2 md:px-6 rounded-2xl font-bold text-xs md:text-lg transition-all ${
               activeView === 'students'
                 ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg'
                 : 'bg-white text-gray-600 hover:bg-gray-50 border-2 border-gray-200'
             }`}
           >
-            <Users className="w-5 h-5 inline mr-2" />
-            Öğrenci Yükle
+            <Users className="w-4 md:w-5 h-4 md:h-5 inline mr-1 md:mr-2" />
+            <span className="hidden sm:inline">Öğrenci Yükle</span>
+            <span className="sm:hidden">Yükle</span>
           </button>
           <button
             onClick={() => setActiveView('studentManage')}
-            className={`py-4 px-6 rounded-2xl font-bold text-lg transition-all ${
+            className={`py-3 md:py-4 px-2 md:px-6 rounded-2xl font-bold text-xs md:text-lg transition-all ${
               activeView === 'studentManage'
                 ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg'
                 : 'bg-white text-gray-600 hover:bg-gray-50 border-2 border-gray-200'
             }`}
           >
-            <UserCog className="w-5 h-5 inline mr-2" />
-            Öğrenci Yönetimi
+            <UserCog className="w-4 md:w-5 h-4 md:h-5 inline mr-1 md:mr-2" />
+            <span className="hidden sm:inline">Öğrenci Yönetimi</span>
+            <span className="sm:hidden">Yönet</span>
           </button>
           <button
             onClick={() => setActiveView('words')}
-            className={`py-4 px-6 rounded-2xl font-bold text-lg transition-all ${
+            className={`py-3 md:py-4 px-2 md:px-6 rounded-2xl font-bold text-xs md:text-lg transition-all ${
               activeView === 'words'
                 ? 'bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg'
                 : 'bg-white text-gray-600 hover:bg-gray-50 border-2 border-gray-200'
             }`}
           >
-            <Upload className="w-5 h-5 inline mr-2" />
-            Kelime Yükle
+            <Upload className="w-4 md:w-5 h-4 md:h-5 inline mr-1 md:mr-2" />
+            <span className="hidden sm:inline">Kelime Yükle</span>
+            <span className="sm:hidden">Yükle</span>
           </button>
           <button
             onClick={() => setActiveView('manage')}
-            className={`py-4 px-6 rounded-2xl font-bold text-lg transition-all ${
+            className={`py-3 md:py-4 px-2 md:px-6 rounded-2xl font-bold text-xs md:text-lg transition-all ${
               activeView === 'manage'
                 ? 'bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg'
                 : 'bg-white text-gray-600 hover:bg-gray-50 border-2 border-gray-200'
             }`}
           >
-            <BookOpen className="w-5 h-5 inline mr-2" />
-            Kelime Yönetimi
+            <BookOpen className="w-4 md:w-5 h-4 md:h-5 inline mr-1 md:mr-2" />
+            <span className="hidden sm:inline">Kelime Yönetimi</span>
+            <span className="sm:hidden">Yönet</span>
           </button>
         </div>
 
@@ -89,9 +93,9 @@ export default function AdminPanel() {
         {activeView === 'manage' && <WordManagement />}
 
         <div className="text-center mt-6 text-gray-600">
-          <p className="flex items-center justify-center gap-2">
+          <p className="flex items-center justify-center gap-2 text-xs md:text-sm">
             Prepared by Murat Develi |
-            <Instagram className="w-5 h-5" />
+            <Instagram className="w-4 md:w-5 h-4 md:h-5" />
             zoom_ingilizce
           </p>
         </div>

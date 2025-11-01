@@ -122,17 +122,17 @@ export default function StudentManagement() {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-3xl shadow-xl p-8 border-2 border-blue-100 text-center">
-        <div className="text-xl text-gray-600">Öğrenciler yükleniyor...</div>
+      <div className="bg-white rounded-3xl shadow-xl p-4 md:p-8 border-2 border-blue-100 text-center">
+        <div className="text-lg md:text-xl text-gray-600">Öğrenciler yükleniyor...</div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-3xl shadow-xl p-8 border-2 border-blue-100">
-      <h3 className="text-2xl font-bold text-gray-800 mb-6">Öğrenci Yönetimi</h3>
+    <div className="bg-white rounded-3xl shadow-xl p-4 md:p-8 border-2 border-blue-100">
+      <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-6">Öğrenci Yönetimi</h3>
 
-      <div className="grid md:grid-cols-2 gap-4 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
           <input
@@ -140,14 +140,14 @@ export default function StudentManagement() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Öğrenci ara..."
-            className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none"
+            className="w-full pl-10 pr-4 py-2 md:py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none text-sm md:text-base"
           />
         </div>
 
         <select
           value={classFilter}
           onChange={(e) => setClassFilter(e.target.value)}
-          className="px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none"
+          className="px-4 py-2 md:py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none text-sm md:text-base"
         >
           <option value="all">Tüm Sınıflar</option>
           {uniqueClasses.map((cls) => (
@@ -159,23 +159,23 @@ export default function StudentManagement() {
       </div>
 
       <div className="bg-gray-50 rounded-xl p-2 mb-4">
-        <p className="text-gray-600 text-center">
+        <p className="text-gray-600 text-center text-sm md:text-base">
           Toplam {filteredStudents.length} öğrenci
         </p>
       </div>
 
       <div className="space-y-3 max-h-[600px] overflow-y-auto">
         {filteredStudents.length === 0 ? (
-          <div className="text-center text-gray-500 py-8">Öğrenci bulunamadı.</div>
+          <div className="text-center text-gray-500 py-8 text-sm md:text-base">Öğrenci bulunamadı.</div>
         ) : (
           filteredStudents.map((student) => (
             <div
               key={student.id}
-              className="bg-gray-50 p-4 rounded-xl border-2 border-gray-200 hover:border-blue-300 transition-colors"
+              className="bg-gray-50 p-3 md:p-4 rounded-xl border-2 border-gray-200 hover:border-blue-300 transition-colors"
             >
               {editingId === student.id ? (
                 <div className="space-y-3">
-                  <div className="grid md:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                     <input
                       type="text"
                       value={editForm.code}
@@ -183,7 +183,7 @@ export default function StudentManagement() {
                         setEditForm({ ...editForm, code: e.target.value })
                       }
                       placeholder="Kod"
-                      className="px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none"
+                      className="px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-sm"
                     />
                     <input
                       type="text"
@@ -192,7 +192,7 @@ export default function StudentManagement() {
                         setEditForm({ ...editForm, name: e.target.value })
                       }
                       placeholder="İsim"
-                      className="px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none"
+                      className="px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-sm"
                     />
                     <input
                       type="text"
@@ -201,20 +201,20 @@ export default function StudentManagement() {
                         setEditForm({ ...editForm, class: e.target.value })
                       }
                       placeholder="Sınıf"
-                      className="px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none"
+                      className="px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-sm"
                     />
                   </div>
                   <div className="flex gap-2">
                     <button
                       onClick={() => saveEdit(student.id)}
-                      className="flex-1 bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors font-semibold flex items-center justify-center gap-2"
+                      className="flex-1 bg-green-500 text-white py-2 px-3 md:px-4 rounded-lg hover:bg-green-600 transition-colors font-semibold flex items-center justify-center gap-2 text-sm md:text-base"
                     >
                       <Save className="w-4 h-4" />
                       Kaydet
                     </button>
                     <button
                       onClick={cancelEdit}
-                      className="flex-1 bg-gray-400 text-white py-2 px-4 rounded-lg hover:bg-gray-500 transition-colors font-semibold flex items-center justify-center gap-2"
+                      className="flex-1 bg-gray-400 text-white py-2 px-3 md:px-4 rounded-lg hover:bg-gray-500 transition-colors font-semibold flex items-center justify-center gap-2 text-sm md:text-base"
                     >
                       <X className="w-4 h-4" />
                       İptal
@@ -222,32 +222,32 @@ export default function StudentManagement() {
                   </div>
                 </div>
               ) : (
-                <div className="flex items-center justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-1">
-                      <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-lg text-sm font-bold">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 md:gap-3 mb-1 flex-wrap">
+                      <span className="bg-blue-100 text-blue-700 px-2 md:px-3 py-1 rounded-lg text-xs md:text-sm font-bold whitespace-nowrap">
                         Sınıf {student.class}
                       </span>
-                      <span className="font-bold text-lg text-gray-800">
+                      <span className="font-bold text-base md:text-lg text-gray-800 truncate">
                         {student.name}
                       </span>
                     </div>
-                    <p className="text-gray-600">Kod: {student.code}</p>
+                    <p className="text-gray-600 text-sm truncate">Kod: {student.code}</p>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 flex-shrink-0">
                     <button
                       onClick={() => startEdit(student)}
                       className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
                       title="Düzenle"
                     >
-                      <Edit2 className="w-5 h-5" />
+                      <Edit2 className="w-4 md:w-5 h-4 md:h-5" />
                     </button>
                     <button
                       onClick={() => deleteStudent(student.id)}
                       className="p-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
                       title="Sil"
                     >
-                      <Trash2 className="w-5 h-5" />
+                      <Trash2 className="w-4 md:w-5 h-4 md:h-5" />
                     </button>
                   </div>
                 </div>
