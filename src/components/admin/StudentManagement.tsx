@@ -80,6 +80,11 @@ export default function StudentManagement() {
   };
 
   const saveEdit = async (id: string) => {
+    if (!editForm.code.trim() || !editForm.name.trim() || !editForm.class.trim()) {
+      alert('Lütfen tüm alanları doldurun!');
+      return;
+    }
+
     try {
       const { error } = await supabase
         .from('students')
@@ -92,8 +97,10 @@ export default function StudentManagement() {
 
       if (error) throw error;
 
-      await loadStudents();
       setEditingId(null);
+      setEditForm({ code: '', name: '', class: '' });
+      await loadStudents();
+      alert('Öğrenci başarıyla güncellendi!');
     } catch (error) {
       console.error('Error updating student:', error);
       alert('Öğrenci güncellenirken hata oluştu!');
