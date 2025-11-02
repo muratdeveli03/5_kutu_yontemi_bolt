@@ -97,9 +97,19 @@ export default function StudentManagement() {
 
       if (error) throw error;
 
+      const updatedStudents = students.map((s) =>
+        s.id === id
+          ? {
+              ...s,
+              code: editForm.code,
+              name: editForm.name,
+              class: editForm.class,
+            }
+          : s
+      );
+      setStudents(updatedStudents);
       setEditingId(null);
       setEditForm({ code: '', name: '', class: '' });
-      await loadStudents();
       alert('Öğrenci başarıyla güncellendi!');
     } catch (error) {
       console.error('Error updating student:', error);
