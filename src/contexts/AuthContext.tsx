@@ -34,7 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const { data, error } = await supabase
         .from('students')
-        .select('*')
+        .select('*', { count: 'exact' })
         .ilike('code', code)
         .maybeSingle();
 
