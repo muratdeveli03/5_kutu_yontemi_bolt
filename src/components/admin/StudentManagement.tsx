@@ -31,12 +31,13 @@ export default function StudentManagement() {
     try {
       const { data, error } = await supabase
         .from('students')
-        .select('*')
+        .select('*', { count: 'exact' })
         .order('class', { ascending: true })
         .order('name', { ascending: true });
 
       if (error) throw error;
       setStudents(data || []);
+      setFilteredStudents(data || []);
       setLoading(false);
     } catch (error) {
       console.error('Error loading students:', error);

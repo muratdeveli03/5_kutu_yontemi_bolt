@@ -23,12 +23,13 @@ export default function WordManagement() {
     try {
       const { data, error } = await supabase
         .from('words')
-        .select('*')
+        .select('*', { count: 'exact' })
         .order('class', { ascending: true })
         .order('english', { ascending: true });
 
       if (error) throw error;
       setWords(data || []);
+      setFilteredWords(data || []);
       setLoading(false);
     } catch (error) {
       console.error('Error loading words:', error);
@@ -72,6 +73,11 @@ export default function WordManagement() {
   };
 
   const saveEdit = async (id: string) => {
+    if (!editForm.english.trim() || !editForm.turkish.trim() || !editForm.class.trim()) {
+      alert('Lütfen tüm alanları doldurun!');
+      return;
+    }
+
     try {
       const { error } = await supabase
         .from('words')
@@ -84,8 +90,20 @@ export default function WordManagement() {
 
       if (error) throw error;
 
-      await loadWords();
+      const updatedWords = words.map((w) =>
+        w.id === id
+          ? {
+              ...w,
+              english: editForm.english,
+              turkish: editForm.turkish,
+              class: editForm.class,
+            }
+          : w
+      );
+      setWords(updatedWords);
       setEditingId(null);
+      setEditForm({ english: '', turkish: '', class: '' });
+      alert('Kelime başarıyla güncellendi!');
     } catch (error) {
       console.error('Error updating word:', error);
       alert('Kelime güncellenirken hata oluştu!');
