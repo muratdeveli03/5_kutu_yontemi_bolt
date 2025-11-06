@@ -9,8 +9,15 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   db: { schema: 'public' },
-  auth: { persistSession: true },
-  global: { headers: { 'x-application-name': 'vocabulary-app' } },
+  auth: { persistSession: false },
+  global: {
+    headers: { 'x-application-name': 'vocabulary-app' },
+    fetch: (...args) => {
+      const req = new Request(...args);
+      req.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+      return fetch(req);
+    }
+  },
 });
 
 export interface Student {

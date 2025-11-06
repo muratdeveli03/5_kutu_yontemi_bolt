@@ -32,9 +32,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (code: string): Promise<boolean> => {
     try {
+      localStorage.removeItem('student');
+
       const { data, error } = await supabase
         .from('students')
-        .select('*', { count: 'exact' })
+        .select('*')
         .ilike('code', code)
         .maybeSingle();
 
